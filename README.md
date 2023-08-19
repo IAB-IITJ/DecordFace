@@ -73,4 +73,55 @@ The mCEI metric measures the performance under corruption using the cosine simil
 | AdaFace          | iR100 (WebFace12M) | 76.69 | 75.80 | 74.09 |  72.72 | 81.86 |
 | [CFSM-Arc](https://github.com/liufeng2915/CFSM)         | iR100              | 61.38 | 70.88 | 65.52 |  66.70 | 74.67 |
 
+## Usage
+
+### Install Dependencies
+Make sure you have Python installed (We used Python version 3.8) and run the following on the console to clone and install the packages required for running the codes in this repository.
+```console
+git clone https://github.com/RishiDarkDevil/Face-Recognition.git
+pip install -r requirements.txt
+```
+**NOTE**: It is strongly suggested that you create a virtual environment to make sure there aren't any dependency conflicts.
+
 ## Corruption
+
+### Dataset Handling
+
+There have been a lot of different styles and formats of face recognition datasets available. Instead of writing separate `Dataset`s and `DataLoader`s for each of them. We provide a single unified `FRDataset` class in `corruption/data_handling/dataset.py` for all Face Recognition Datasets. Key features:
+- Simply pass in the image dataset you have as `indir_path`, it indexes all the image files present inside the `indir_path`.
+- If you want to convert the images in `indir_path` (the images may lie inside several levels of hierarchy e.g. `Paul/frontal/paul.png`) to features or apply any other transformation specify `outdir_path` and call `create_directory_structure` to mimic the same directory structure at `outdir_path`.
+- Loading the data is as simple as indexing the `FRDataset` object it returns the RGB loaded image and the target path where the image needs to be saved in `outdir_path`.
+- If you want to apply various transformations to a single image and store them at different locations, you can still use `FRDataset` there is no need to pass the `outdir_path` parameter, simply set `enable_rebase=True` and now it will return the target path which is not appended with `outdir_path` and you can use it to save the images following the same directory structure at multiple different locations or simply save it otherwise without using the target paths at a location of your choice.
+
+The following code illustrates how simple it is to deal with any FR Dataset.
+```python
+import matplotlib.pyplot as plt
+import skimage.io as io
+from data_handling.dataset import FRDataset
+
+# index the dataset
+dataset = FRDataset(<PATH TO YOUR INPUT DATASET DIRECTORY>, <PATH TO THE TARGET DATASET DIRECTORY>, <WANT VERBOSE?>, <WANT REBASE?>)
+
+# creates target dataset (same folder structure as <INPUT DATASET DIRECTORY> at <TARGET DATASET DIRECTORY> without images)
+dataset.create_directory_structure()
+
+# retrieve image
+image, target_path = dataset[0]
+
+# display image
+plt.imshow(image)
+
+# do some `transform` on the image 
+transformed_image = transform(image)
+
+# save the transformed image (in our case corruption & perturbation)
+io.imsave(target_path, transformed_image)
+
+# You can simply loop from all images and transform them or use DataLoaders to fasten up the process by loading images in batches.
+# In particular, We recommend a hack to incorporate multi-processing to do superfast image transformation using `collate_fn` of PyTorch DataLoader.
+# Sneak in your transformation function inside `collate_fn` and save images there. It is incorporated in the `corruption/corrupt-image-v3.py`
+# In the above-mentioned file, I needed to save the images at different target paths which needed to keep track of where the images are coming
+# from in <INPUT DATASET DIRECTORY> hence I used `enable_rebase = True`.
+```
+
+**NOTE**: The file path to an image is unique no matter where it lies inside a dataset directory. We exploit that to keep track of each image file (in our case face images). All the relational files such as attributes related to an image are associated with the image path to keep track of all the attributes even after the images are transformed into corrupted ones or converted into features, extracted by various FR models.
