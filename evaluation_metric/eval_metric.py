@@ -177,7 +177,7 @@ An example for the same is shown below for ArcFace R100 Backbone's performance o
 | r100           | zoom_blur         | 1 | 0.9188 | 0.8693 | 0.7772 | 0.7193 | 0.6227 |
 +----------------+-------------------+---+--------+--------+--------+--------+--------+
 
-The first 3 rows are just headers and won't be required in the function. We will refer to this dataset while explaining the arguments of `get_mVCE` function.
+The first 3 rows are just headers and won't be required in the function. We will refer to this dataset while explaining the arguments of `get_mCEI` function.
 Let's refer the data above as `dfsim` in the rest of the code.
 '''
 # # Function for calculating mCEI metric
