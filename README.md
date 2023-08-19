@@ -89,7 +89,7 @@ bash corrupt.sh
 
 - The `corrupt-image-v3.py` uses the `FRDataset` class.
 
-### Evaluation Metric
+### Evaluation Metrics
 
 The functions for calculating the evaluation metrics, provided one already have calculated the $TPR@FPR$ values and average cosine similarity scores on the FACET benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
 - `get_mVCE`: Returns the model name and corresponding mVCE and RmVCE score.
