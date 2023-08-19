@@ -2,10 +2,10 @@
 This repository contains the code required for the creation of the FACET benchmark. It also provides code for the proposed mVCE and mCEI evaluation metrics used for performance comparison of various face reognition models.
 
 ## FACET Leaderboard
-Here we present the leaderboard of all the Face Recognition methods and how they stack up against each other in terms of robustness performance on our corruption benchmark datasets in FACET. For the leaderboards we used mVCE and mCEI as the evaluation metric.
+We present the leaderboard of all the Face Recognition methods and how they compare against each other in terms of their robustness based on the FACET benchmark. The performance is computed using mVCE and mCEI as the evaluation metrics.
 
 ### Mean Verification Corruption Error (mVCE) (&darr;) Leaderbaord
-The mVCE metric measures the performance under corruption using the TPR of the model and backbone computed at the reporting FPRs mentioned in the row just below the names of the dataset. Here we have created the leaderboard based on the _higher severity protocol_.
+The mVCE metric measures the performance under corruption using the verification performance (TPR@FAR) of the model. Here, we report the leaderboard based on the _high severity protocol_.
 
 | Model Name       | Backbone           |   AgeDB -_facet_  |   CALFW -_facet_ |   CPLFW -_facet_ |  CFP-FP -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |
 |------------------|--------------------|:-----:|:-----:|:------:|:------:|:------:|:------:|:------:|
