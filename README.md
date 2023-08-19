@@ -1,5 +1,5 @@
 # FACET: A Benchmark for Common Corruptions in Face Recognition
-This repository contains all the codes for creation and evaluation metric computation on the FACET dataset.
+This repository contains the code required for the creation of the FACET benchmark. It also provides code for the proposed mVCE and mCEI evaluation metrics used for performance comparison of various face reognition models.
 
 ## FACET Leaderboard
 Here we present the leaderboard of all the Face Recognition methods and how they stack up against each other in terms of robustness performance on our corruption benchmark datasets in FACET. For the leaderboards we used mVCE and mCEI as the evaluation metric.
@@ -84,8 +84,8 @@ Run `imagenet_c` image corruptions with the following command line arguments.
 cd corruption
 bash corrupt.sh
 ```
-- It is recommended not to change the `--batch_size` or `--num_workers` as we found out the defaults work the best and take advantage of `DataLoader`'s multi-processing. Although if you have a specific use case you may supply a value of your choice.
-- The `corrupt-image-v3.py` uses the `FRDataset` class so no need to worry about how the images are present in `indir_path`.
+
+- The `corrupt-image-v3.py` uses the `FRDataset` class.
 
 ### Evaluation Metric
 
@@ -93,4 +93,4 @@ The useful functions for calculating the evaluation metric, provided one already
 - `get_mVCE`: Returns the model name and corresponding mVCE and RmVCE score.
 - `get_mCEI`: Returns the model name and corresponding mCEI score.
 
-**INFO**: Check the `evaluation_metric/eval_metric.py` for a proper explanation shown with ArcFace R100 Backbone.
+**INFO**: Check the `evaluation_metric/eval_metric.py` for a proper explanation.
