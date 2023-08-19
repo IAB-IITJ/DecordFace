@@ -83,8 +83,6 @@ pip install -r requirements.txt
 ```
 **NOTE**: It is strongly suggested that you create a virtual environment to make sure there aren't any dependency conflicts.
 
-## Corruption
-
 ### Dataset Handling
 
 There have been a lot of different styles and formats of face recognition datasets available. Instead of writing separate `Dataset`s and `DataLoader`s for each of them. We provide a single unified `FRDataset` class in `corruption/data_handling/dataset.py` for all Face Recognition Datasets. Key features:
@@ -97,7 +95,7 @@ The following code illustrates how simple it is to deal with any FR Dataset.
 ```python
 import matplotlib.pyplot as plt
 import skimage.io as io
-from data_handling.dataset import FRDataset
+from corruption.data_handling.dataset import FRDataset
 
 # index the dataset
 dataset = FRDataset(<PATH TO YOUR INPUT DATASET DIRECTORY>, <PATH TO THE TARGET DATASET DIRECTORY>, <WANT VERBOSE?>, <WANT REBASE?>)
@@ -125,3 +123,21 @@ io.imsave(target_path, transformed_image)
 ```
 
 **NOTE**: The file path to an image is unique no matter where it lies inside a dataset directory. We exploit that to keep track of each image file (in our case face images). All the relational files such as attributes related to an image are associated with the image path to keep track of all the attributes even after the images are transformed into corrupted ones or converted into features, extracted by various FR models.
+
+### Image Corruption
+
+Run `imagenet_c` image corruptions with the following command line arguments.
+```console
+cd corruption
+bash corrupt.sh
+```
+- It is recommended not to change the `--batch_size` or `--num_workers` as we found out the defaults work the best and take advantage of `DataLoader`'s multi-processing. Although if you have a specific use case you may supply a value of your choice.
+- The `corrupt-image-v3.py` uses the `FRDataset` class so no need to worry about how the images are present in `indir_path`.
+
+### Evaluation Metric
+
+The useful functions for calculating the evaluation metric, provided one already have calculated the $TPR$ values and average cosine similarity scores on the FACET benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
+- `get_mVCE`: Returns the model name and corresponding mVCE and RmVCE score.
+- `get_mCEI`: Returns the model name and corresponding mCEI score.
+
+**INFO**: Check the `evaluation_metric/eval_metric.py` for a proper explanation shown with ArcFace R100 Backbone.
