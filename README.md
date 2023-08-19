@@ -85,6 +85,8 @@ pip install -r requirements.txt
 
 ### Dataset Handling
 
+![](assets/FRDataset2.svg)
+
 There have been a lot of different styles and formats of face recognition datasets available. Instead of writing separate `Dataset`s and `DataLoader`s for each of them. We provide a single unified `FRDataset` class in `corruption/data_handling/dataset.py` for all Face Recognition Datasets. Key features:
 - Simply pass in the image dataset you have as `indir_path`, it indexes all the image files present inside the `indir_path`.
 - If you want to convert the images in `indir_path` (the images may lie inside several levels of hierarchy e.g. `Paul/frontal/paul.png`) to features or apply any other transformation specify `outdir_path` and call `create_directory_structure` to mimic the same directory structure at `outdir_path`.
@@ -125,6 +127,8 @@ io.imsave(target_path, transformed_image)
 **NOTE**: The file path to an image is unique no matter where it lies inside a dataset directory. We exploit that to keep track of each image file (in our case face images). All the relational files such as attributes related to an image are associated with the image path to keep track of all the attributes even after the images are transformed into corrupted ones or converted into features, extracted by various FR models.
 
 ### Image Corruption
+
+![](assets/FRCorruption2.svg)
 
 Run `imagenet_c` image corruptions with the following command line arguments.
 ```console
