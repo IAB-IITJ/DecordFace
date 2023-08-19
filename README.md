@@ -5,7 +5,7 @@ This repository contains the code required for the creation of the FACET benchma
 We present the leaderboard of all the Face Recognition methods and how they compare against each other in terms of their robustness based on the FACET benchmark. The performance is computed using mVCE and mCEI as the evaluation metrics.
 
 ### Mean Verification Corruption Error (mVCE) (&darr;) Leaderbaord
-The mVCE metric measures the performance under corruption using the verification performance (TPR@FAR) of the model. Here, we report the leaderboard based on the _high severity protocol_.
+The mVCE metric measures the performance under corruption using the verification performance ($TPR@FPR$) of the model. Here, we report the leaderboard based on the _high severity protocol_.
 
 | Model Name       | Backbone           |   AgeDB -_facet_  |   CALFW -_facet_ |   CPLFW -_facet_ |  CFP-FP -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |
 |------------------|--------------------|:-----:|:-----:|:------:|:------:|:------:|:------:|:------:|
@@ -41,7 +41,7 @@ The mVCE metric measures the performance under corruption using the verification
 \* denotes the case where the clean error was observed to be greater than $40$%.
 
 ### Mean Corruption Embedding Invariance (mCEI) (&uarr;) Leaderbaord
-The mCEI metric measures the performance under corruption using the cosine similarity between the clean and corrupt embeddings. Here we have created the leaderboard based on the _higher severity protocol_.
+The mCEI metric measures the performance under corruption using the cosine similarity between the clean and corrupt embeddings. Here, we report the leaderboard based on the _high severity protocol_.
 
 | Model Name       | Backbone           | AgeDB -_facet_ | CALFW -_facet_ | CPLFW -_facet_ | CFP-FP -_facet_ | IJB-C -_facet_ |
 |------------------|--------------------|:-----:|:-----:|:-----:|:------:|:-----:|
@@ -89,8 +89,8 @@ bash corrupt.sh
 
 ### Evaluation Metric
 
-The useful functions for calculating the evaluation metric, provided one already have calculated the $TPR$ values and average cosine similarity scores on the FACET benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
+The functions for calculating the evaluation metrics, provided one already have calculated the $TPR@FPR$ values and average cosine similarity scores on the FACET benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
 - `get_mVCE`: Returns the model name and corresponding mVCE and RmVCE score.
 - `get_mCEI`: Returns the model name and corresponding mCEI score.
 
-**INFO**: Check the `evaluation_metric/eval_metric.py` for a proper explanation.
+**INFO**: Check the `evaluation_metric/eval_metric.py` for a detailed explanation.
