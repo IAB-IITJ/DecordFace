@@ -1,7 +1,7 @@
 # DecordFace: Degraded and Corrupted Face Recognition Benchmark
 This repository contains the code required for the creation of the DecordFace benchmark. It also provides code for the proposed mVCE and mCEI evaluation metrics used for performance comparison of various face reognition models.
 
-![](assets/collage-cplfw-facet2.svg)
+![](assets/collage-cplfw-df.svg)
 
 ## DecordFace Leaderboard
 We present the leaderboard of all the Face Recognition methods and how they compare against each other in terms of their robustness based on the DecordFace benchmark. The performance is computed using mVCE and mCEI as the evaluation metrics.
