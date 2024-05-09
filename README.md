@@ -1,15 +1,15 @@
-# FACET: A Benchmark for Common Corruptions in Face Recognition
-This repository contains the code required for the creation of the FACET benchmark. It also provides code for the proposed mVCE and mCEI evaluation metrics used for performance comparison of various face reognition models.
+# DecordFace: Degraded and Corrupted Face Recognition Benchmark for Evaluation
+This repository contains the code required for the creation of the DecordFace benchmark. It also provides code for the proposed mVCE and mCEI evaluation metrics used for performance comparison of various face reognition models.
 
 ![](assets/collage-cplfw-facet2.svg)
 
-## FACET Leaderboard
-We present the leaderboard of all the Face Recognition methods and how they compare against each other in terms of their robustness based on the FACET benchmark. The performance is computed using mVCE and mCEI as the evaluation metrics.
+## DecordFace Leaderboard
+We present the leaderboard of all the Face Recognition methods and how they compare against each other in terms of their robustness based on the DecordFace benchmark. The performance is computed using mVCE and mCEI as the evaluation metrics.
 
 ### Mean Verification Corruption Error (mVCE) (&darr;) Leaderbaord
 The mVCE metric measures the performance under corruption using the verification performance ($TPR@FPR$) of the model. Here, we report the leaderboard based on the _high severity protocol_.
 
-| Model Name       | Backbone           |   AgeDB -_facet_  |   CALFW -_facet_ |   CPLFW -_facet_ |  CFP-FP -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |  IJB-C -_facet_ |
+| Model Name       | Backbone           |   AgeDB -_decord_  |   CALFW -_decord_ |   CPLFW -_decord_ |  CFP-FP -_decord_ |  IJB-C -_decord_ |  IJB-C -_decord_ |  IJB-C -_decord_ |
 |------------------|--------------------|:-----:|:-----:|:------:|:------:|:------:|:------:|:------:|
 |                  |                    |       |       |        |        |  1e-4  |  1e-5  |  1e-6  |
 | [LightCNN](https://github.com/AlfredXiangWu/LightCNN#)         | 9L                 | 60.40 | 57.09 | 82.81* |  65.14 |  60.67 |  71.63 |  81.71 |
@@ -45,7 +45,7 @@ The mVCE metric measures the performance under corruption using the verification
 ### Mean Corruption Embedding Invariance (mCEI) (&uarr;) Leaderbaord
 The mCEI metric measures the performance under corruption using the cosine similarity between the clean and corrupt embeddings. Here, we report the leaderboard based on the _high severity protocol_.
 
-| Model Name       | Backbone           | AgeDB -_facet_ | CALFW -_facet_ | CPLFW -_facet_ | CFP-FP -_facet_ | IJB-C -_facet_ |
+| Model Name       | Backbone           | AgeDB -_decord_ | CALFW -_decord_ | CPLFW -_decord_ | CFP-FP -_decord_ | IJB-C -_decord_ |
 |------------------|--------------------|:-----:|:-----:|:-----:|:------:|:-----:|
 | [LightCNN](https://github.com/AlfredXiangWu/LightCNN#)         | 9L                 | 56.75 | 56.78 | 55.99 |  55.67 | 59.90 |
 | LightCNN         | 29L                | 66.58 | 65.87 | 63.58 |  62.83 | 69.50 |
@@ -91,7 +91,7 @@ bash corrupt.sh
 
 ### Evaluation Metrics
 
-The functions for calculating the evaluation metrics, provided one already have calculated the $TPR@FPR$ values and average cosine similarity scores on the FACET benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
+The functions for calculating the evaluation metrics, provided one already have calculated the $TPR@FPR$ values and average cosine similarity scores on the DecordFace benchmark dataset, are included in the `evaluation_metric/eval_metric.py`. It makes available 2 functions:
 - `get_mVCE`: Returns the model name and corresponding mVCE and RmVCE score.
 - `get_mCEI`: Returns the model name and corresponding mCEI score.
 
